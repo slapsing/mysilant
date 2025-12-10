@@ -1,0 +1,14 @@
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from .serializers import UserShortSerializer
+
+
+class CurrentUserView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        serializer = UserShortSerializer(request.user)
+        return Response(serializer.data)

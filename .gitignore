@@ -1,0 +1,65 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+frontend/node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# --- Общие ---
+*.py[cod]
+__pycache__/
+*.sqlite3
+*.db
+
+# --- Python / Django ---
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+*.pyc
+.mypy_cache/
+.pytest_cache/
+.cache/
+
+# Django static (собирается collectstatic)
+backend/staticfiles/
+
+# --- Node / frontend ---
+node_modules/
+dist/
+frontend/node_modules/
+frontend/dist/
+
+# --- IDE / ОС ---
+.idea/
+.vscode/
+*.iml
+Thumbs.db
+
+# --- Секреты и настройки ---
+.env
+*.env
+.env.*
+backend/.env
+frontend/.env
+frontend/.env.local
+

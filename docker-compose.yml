@@ -1,0 +1,45 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: silant-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: mysilant
+      POSTGRES_USER: mysilant_admin
+      POSTGRES_PASSWORD: midorfeed
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build:
+      context: ./backend
+    container_name: silant-backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DJANGO_DEBUG: "False"
+      ALLOWED_HOSTS: "localhost,127.0.0.1,backend,silant-backend"
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: silant-frontend
+    restart: unless-stopped
+    environment:
+      VITE_API_BASE_URL: "http://localhost:8000/api"
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  db_data:
